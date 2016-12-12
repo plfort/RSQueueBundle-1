@@ -175,6 +175,15 @@ class TestConsumerCommand extends ConsumerCommand
 }
 ```
 
+``` yaml
+services:
+   app.consumer.test_consumer:
+     class: "Namespace/Of/TestConsumerCommand"
+     parent: "rs_queue.command.abstract_consumer"
+     tags:
+        - { name: console.command }
+```
+
 Publishers/Subscribers
 -----
 This model allows data broadcasting. This means that one or more Subscribers will treat all elements of the queue, but only if they are listening just in the moment publisher publish them.
@@ -240,6 +249,15 @@ class TestSubscriberCommand extends SubscriberCommand
         $output->writeln($payload);
     }
 }
+```
+
+``` yaml
+services:
+   app.consumer.test_subscriber:
+     class: "Namespace/Of/TestSubscriberCommand"
+     parent: "rs_queue.command.abstract_subscriber"
+     tags:
+       - { name: console.command }
 ```
 
 By extending PSubscriberCommand you can define patterns instead of queue names.

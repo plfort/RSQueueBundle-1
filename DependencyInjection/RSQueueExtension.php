@@ -57,6 +57,7 @@ class RSQueueExtension extends Extension
         );
 
         $loader->load('services.yml');
+        $loader->load('commands.yml');
         $loader->load('collector.yml');
         $loader->load('redis.yml');
         $loader->load('serializers.yml');

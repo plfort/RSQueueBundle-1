@@ -1,0 +1,15 @@
+services:
+   rs_queue.command.abstract_consumer:
+     class: RSQueue\Command\ConsumerCommand
+     abstract: true
+     arguments:
+       - "@rs_queue.consumer"
+
+   rs_queue.command.abstract_subscriber:
+     class: RSQueue\Command\SubscriberCommand
+     abstract: true
+     arguments:
+       - "@rs_queue.serializer"
+       - "@rs_queue.resolver.queue_alias"
+       - "@event_dispatcher"
+       - "@rs_queue.redis"
