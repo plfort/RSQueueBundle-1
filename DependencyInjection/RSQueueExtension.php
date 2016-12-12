@@ -15,6 +15,8 @@
 
 namespace RSQueueBundle\DependencyInjection;
 
+use RSQueue\Redis\PredisClientAdapter;
+use RSQueue\Redis\RedisAdapter;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader;
@@ -49,6 +51,16 @@ class RSQueueExtension extends Extension
         $container->setParameter(
             'rs_queue.server.redis',
             $config['server']['redis']
+        );
+
+        $rsQueueRedisClass = RedisAdapter::class;
+        if($config['server']['redis']['driver'] === 'predis') {
+            $rsQueueRedisClass = PredisClientAdapter::class;
+        }
+
+        $container->setParameter(
+            'rs_queue.redis.class',
+            $rsQueueRedisClass
         );
 
         $loader = new Loader\YamlFileLoader(
