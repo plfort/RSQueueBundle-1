@@ -319,6 +319,15 @@ class TestPSubscriberCommand extends PSubscriberCommand
 }
 ```
 
+``` yaml
+services:
+   app.consumer.test_consumer:
+     class: "Namespace/Of/TestPSubscriberCommand"
+     parent: "rs_queue.command.abstract_psubscriber"
+     tags:
+        - { name: console.command }
+```
+
 Events
 -----
 Custom events are used in this bundle.
